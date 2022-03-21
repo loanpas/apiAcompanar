@@ -37,12 +37,12 @@ if(Meteor.isServer) {
 
         // POST /espacios - { espacio as post data } - agrega un nuevo espacio a la collecion MongoDB.
         .post(function() {
-            var response;
+            var response;            
             if(this.request.body.nombre === "" || 
                 this.request.body.direccion === "" ||
-                this.request.body.geolocalizacion === "" ) {
+                this.request.body.geolocalizacion === null ) {
                     response = messages("000", true, "datos inválidos !.")
-            } else {
+            } else {                
                 insertEspacio({"nombre": this.request.body.nombre, "direccion": this.request.body.direccion, "descripcion": this.request.body.descripcion, "geolocalizacion": this.request.body.geolocalizacion});
                 response = messages("201", false, "registro agregado con éxito !.")
             }
